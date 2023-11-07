@@ -115,7 +115,7 @@ void usage(char *argv0) {
 int setup(int argc, char **argv) {
   int opt;
   extern char *optarg;
-  char *filename = 0;
+  char *filename = "100";
   float *buf;
   char line[1024];
   int isBinaryFile = 0;
@@ -136,7 +136,7 @@ int setup(int argc, char **argv) {
   int isRMSE = 0;
   float rmse;
 
-  int isOutput = 0;
+  int isOutput = 1;
   // float	cluster_timing, io_timing;
 
   /* obtain command line arguments and change appropriate options */
@@ -179,9 +179,9 @@ int setup(int argc, char **argv) {
   /* get nfeatures and npoints */
   // io_timing = omp_get_wtime();
 
-  /*if (isBinaryFile) { // Binary file input
+  if (isBinaryFile) { // Binary file input
     FILE *infile;
-    if ((infile = fopen("100", "r")) == NULL) {
+    if ((infile = fopen(filename, "r")) == NULL) {
       fprintf(stderr, "Error: no such file (%s)\n", filename);
       exit(1);
     }
@@ -199,7 +199,7 @@ int setup(int argc, char **argv) {
     fclose(infile);
   } else {
     FILE *infile;
-    if ((infile = fopen("100", "r")) == NULL) {
+    if ((infile = fopen(filename, "r")) == NULL) {
       fprintf(stderr, "Error: no such file (%s)\n", filename);
       exit(1);
     }
@@ -234,8 +234,9 @@ int setup(int argc, char **argv) {
       }
     }
     fclose(infile);
-  }*/
+  }
 
+/*
   npoints = 100;
   nfeatures = 100;
   buf = (float *)malloc(npoints * nfeatures * sizeof(float));
@@ -247,6 +248,7 @@ int setup(int argc, char **argv) {
   for (i = 0; i < npoints * nfeatures; ++i) {   
     buf[i] = (i % 64);
   }
+*/
 
   // io_timing = omp_get_wtime() - io_timing;
 
